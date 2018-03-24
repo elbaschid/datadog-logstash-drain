@@ -1,9 +1,15 @@
 version: "2"
 
 services:
-  logstash:
-    image: elbaschid/datadog-logstash-drain
-    build: .
+  logstash-xpack:
+    image: elbaschid/datadog-logstash-drain:xpack
+    build: ./logstash
     volumes:
-      - "./pipeline:/usr/share/logstash/pipeline/"
+      - "./logstash/pipeline:/usr/share/logstash/pipeline/"
+    command: logstash --config.debug
+  logstash-oss:
+    image: elbaschid/datadog-logstash-drain:oss
+    build: ./logstash-oss/
+    volumes:
+      - "./logstash-oss/pipeline:/usr/share/logstash/pipeline/"
     command: logstash --config.debug
