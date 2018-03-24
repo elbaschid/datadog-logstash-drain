@@ -1,0 +1,9 @@
+version: "2"
+
+services:
+  logstash:
+    image: elbaschid/datadog-logstash-drain
+    build: .
+    volumes:
+      - "./pipeline:/usr/share/logstash/pipeline/"
+    command: logstash --config.debug
